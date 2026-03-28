@@ -1,0 +1,147 @@
+/* ── Feature Highlight ── */
+.section {
+  padding: var(--space-4xl) 0;
+  background: var(--gray-50);
+}
+
+.inner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 var(--space-xl);
+}
+
+.card {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  background: var(--white);
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  box-shadow: var(--shadow-xl);
+  border: 1px solid var(--gray-200);
+}
+
+.cardContent {
+  padding: var(--space-4xl) var(--space-3xl);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.cardLabel {
+  display: inline-flex;
+  font-family: var(--font-heading);
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--gold);
+  margin-bottom: var(--space-md);
+}
+
+.cardTitle {
+  font-family: var(--font-heading);
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  font-weight: 800;
+  color: var(--navy);
+  line-height: 1.1;
+  margin-bottom: var(--space-lg);
+}
+
+.cardTitleAccent {
+  color: var(--gold);
+}
+
+.cardDescription {
+  font-size: 1.1rem;
+  color: var(--text-muted);
+  line-height: 1.7;
+  margin-bottom: var(--space-2xl);
+}
+
+.cardImageWrap {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 400px;
+}
+
+.cardImage {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+
+.visualGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-xl);
+  margin-bottom: var(--space-2xl);
+}
+
+.visualItem {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-md);
+}
+
+.visualIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  background: rgba(0, 43, 92, 0.05);
+  color: var(--navy);
+  flex-shrink: 0;
+}
+
+.visualNumber {
+  font-family: var(--font-heading);
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: var(--navy-dark);
+  line-height: 1.1;
+  margin-bottom: 0.2rem;
+}
+
+.visualLabel {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+.actionWrap {
+  margin-top: auto;
+}
+
+/* ── Responsive ── */
+@media (max-width: 1024px) {
+  .card {
+    grid-template-columns: 1fr;
+  }
+  .cardImageWrap {
+    height: 400px;
+    order: -1;
+  }
+  .cardContent {
+    padding: var(--space-2xl) var(--space-xl);
+  }
+}
+
+@media (max-width: 640px) {
+  .visualGrid {
+    grid-template-columns: 1fr;
+    gap: var(--space-lg);
+  }
+  .visualIcon {
+    width: 40px;
+    height: 40px;
+  }
+  .visualNumber {
+    font-size: 1.5rem;
+  }
+  .inner {
+    padding: 0 var(--space-md);
+  }
+}

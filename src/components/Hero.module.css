@@ -1,0 +1,266 @@
+/* ── Hero Section ── */
+.hero {
+  position: relative;
+  min-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: var(--navy-dark);
+}
+
+/* ── Video Background ── */
+.heroVideo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+}
+
+.heroVideoOverlay {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(90deg, rgba(0, 20, 50, 0.82) 0%, rgba(0, 30, 65, 0.6) 50%, rgba(0, 20, 50, 0.35) 100%);
+  z-index: 1;
+}
+
+/* ── Hero Content ── */
+.heroContent {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  align-items: flex-end;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 var(--space-xl);
+  padding-top: 200px;
+  padding-bottom: var(--space-3xl);
+  width: 100%;
+  flex: 1;
+}
+
+.heroLeft {
+  max-width: 600px;
+  animation: heroFadeIn 0.8s ease forwards;
+}
+
+@keyframes heroFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.heroTitle {
+  font-family: var(--font-heading);
+  font-size: clamp(2.5rem, 6vw, 3.8rem);
+  font-weight: 800;
+  color: var(--white);
+  line-height: 1.05;
+  margin-bottom: var(--space-lg);
+}
+
+.heroTitleAccent {
+  background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.heroDescription {
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.8);
+  line-height: 1.7;
+  margin-bottom: var(--space-2xl);
+  max-width: 480px;
+}
+
+.heroActions {
+  display: flex;
+  gap: var(--space-md);
+  flex-wrap: wrap;
+}
+
+.heroCta {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: 0.7rem 1.6rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--white);
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  border-radius: var(--radius-full);
+  background: transparent;
+  transition: all var(--transition-base);
+  cursor: pointer;
+  font-family: var(--font-body);
+}
+
+.heroCta:hover {
+  border-color: var(--gold);
+  color: var(--gold);
+  background: rgba(245, 166, 35, 0.08);
+}
+
+/* ── Dot Indicators (right side) ── */
+.heroDots {
+  position: absolute;
+  right: var(--space-2xl);
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  z-index: 3;
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.4);
+  background: transparent;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  padding: 0;
+}
+
+.dotActive {
+  composes: dot;
+  background: var(--gold);
+  border-color: var(--gold);
+}
+
+/* ── Tab Navigation Bar ── */
+.tabBar {
+  position: relative;
+  z-index: 3;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.tabBarInner {
+  display: flex;
+  align-items: center;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 var(--space-xl);
+  gap: 0;
+  position: relative;
+}
+
+.tabScrollBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  color: rgba(255, 255, 255, 0.5);
+  cursor: pointer;
+  transition: color var(--transition-fast);
+  flex-shrink: 0;
+  background: none;
+  border: none;
+  font-family: var(--font-body);
+}
+
+.tabScrollBtn:hover {
+  color: var(--white);
+}
+
+.tabList {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  overflow-x: auto;
+  flex: 1;
+  scrollbar-width: none;
+}
+
+.tabList::-webkit-scrollbar {
+  display: none;
+}
+
+.tab {
+  position: relative;
+  padding: 1rem 1.5rem;
+  font-size: 0.88rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.6);
+  white-space: nowrap;
+  transition: all var(--transition-base);
+  cursor: pointer;
+  border: none;
+  background: none;
+  font-family: var(--font-body);
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  text-decoration: none;
+}
+
+.tab:hover {
+  color: var(--white);
+}
+
+.tabActive {
+  composes: tab;
+  color: var(--gold);
+  font-weight: 600;
+}
+
+.tabActive::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 1.5rem;
+  right: 1.5rem;
+  height: 3px;
+  background: var(--gold);
+  border-radius: 3px 3px 0 0;
+}
+
+.tabIcon {
+  display: inline-flex;
+  align-items: center;
+}
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+  .hero {
+    min-height: 85vh;
+  }
+
+  .heroContent {
+    padding-top: 160px;
+    padding-left: var(--space-md);
+    padding-right: var(--space-md);
+  }
+
+  .heroLeft {
+    max-width: 100%;
+  }
+
+  .heroDots {
+    display: none;
+  }
+
+  .tabBarInner {
+    padding: 0 var(--space-sm);
+  }
+
+  .tab {
+    padding: 0.8rem 1rem;
+    font-size: 0.82rem;
+  }
+
+  .tabScrollBtn {
+    display: none;
+  }
+}

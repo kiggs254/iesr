@@ -1,0 +1,155 @@
+/* ── Service Cards Grid ── */
+.section {
+  padding: var(--space-4xl) 0;
+  background: var(--gray-50);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-lg);
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 var(--space-xl);
+}
+
+.card {
+  position: relative;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  min-height: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  cursor: pointer;
+  transition: all var(--transition-slow);
+}
+
+.card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-xl);
+}
+
+.cardBg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.cardBg img {
+  transition: transform var(--transition-slow);
+}
+
+.card:hover .cardBg img {
+  transform: scale(1.08);
+}
+
+.cardOverlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  transition: opacity var(--transition-base);
+}
+
+.card:hover .cardOverlay {
+  opacity: 0.9;
+}
+
+.cardContent {
+  position: relative;
+  z-index: 2;
+  padding: var(--space-xl);
+}
+
+.cardLabel {
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: var(--space-xs);
+}
+
+.cardTitle {
+  font-family: var(--font-heading);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: var(--space-sm);
+}
+
+.cardLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--gold-light);
+  transition: gap var(--transition-base);
+}
+
+.card:hover .cardLink {
+  gap: 0.6rem;
+}
+
+/* Card Variants */
+.cardNavy .cardBg {
+  background: linear-gradient(135deg, #002B5C, #003D7A);
+}
+.cardNavy .cardOverlay {
+  background: linear-gradient(180deg, transparent 30%, rgba(0, 27, 58, 0.95));
+}
+
+.cardGold .cardBg {
+  background: linear-gradient(135deg, #D4901A, #F5A623);
+}
+.cardGold .cardOverlay {
+  background: linear-gradient(180deg, transparent 30%, rgba(180, 120, 0, 0.9));
+}
+
+.cardDark .cardBg {
+  background: linear-gradient(135deg, #001A3A, #002B5C);
+}
+.cardDark .cardOverlay {
+  background: linear-gradient(180deg, transparent 30%, rgba(0, 15, 35, 0.95));
+}
+
+.cardTeal .cardBg {
+  background: linear-gradient(135deg, #004D5C, #006B7A);
+}
+.cardTeal .cardOverlay {
+  background: linear-gradient(180deg, transparent 30%, rgba(0, 60, 70, 0.95));
+}
+
+/* Card icon decoration */
+.cardIcon {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-md);
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: var(--space-md);
+  color: var(--white);
+}
+
+/* ── Responsive ── */
+@media (max-width: 1024px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .grid {
+    grid-template-columns: 1fr;
+    padding: 0 var(--space-md);
+  }
+
+  .card {
+    min-height: 160px;
+  }
+}

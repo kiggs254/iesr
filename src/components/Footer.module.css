@@ -1,0 +1,189 @@
+/* ── Footer ── */
+.footer {
+  background: var(--navy-dark);
+  color: rgba(255, 255, 255, 0.8);
+  padding-top: var(--space-4xl);
+}
+
+/* ── Social Bar ── */
+.socialBar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-lg);
+  padding: var(--space-lg) 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  margin-bottom: var(--space-3xl);
+}
+
+.socialLink {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--transition-base);
+  color: var(--white);
+}
+
+.socialLink:hover {
+  background: var(--gold);
+  color: var(--navy-dark);
+  transform: translateY(-3px);
+}
+
+.socialLink svg {
+  width: 18px;
+  height: 18px;
+}
+
+/* ── Footer Grid ── */
+.footerGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-3xl);
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 var(--space-xl) var(--space-3xl);
+}
+
+.footerColumn h4 {
+  font-family: var(--font-heading);
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: var(--space-lg);
+  position: relative;
+  padding-bottom: var(--space-sm);
+}
+
+.footerColumn h4::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 30px;
+  height: 2px;
+  background: var(--gold);
+  border-radius: 1px;
+}
+
+.footerColumn ul {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.footerColumn a {
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.65);
+  transition: all var(--transition-fast);
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.footerColumn a:hover {
+  color: var(--gold);
+  transform: translateX(4px);
+}
+
+.footerColumn a::before {
+  content: '›';
+  color: var(--gold);
+  font-size: 1rem;
+  opacity: 0;
+  transition: opacity var(--transition-fast);
+}
+
+.footerColumn a:hover::before {
+  opacity: 1;
+}
+
+/* ── Contact Bar ── */
+.contactBar {
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding: var(--space-xl) 0;
+}
+
+.contactBarInner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 var(--space-xl);
+  gap: var(--space-xl);
+}
+
+.contactItem {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+}
+
+.contactIcon {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.contactIcon svg {
+  width: 18px;
+  height: 18px;
+  fill: var(--gold);
+}
+
+.contactLabel {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: rgba(255, 255, 255, 0.5);
+  margin-bottom: 2px;
+}
+
+.contactValue {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--white);
+}
+
+/* ── Copyright ── */
+.copyright {
+  background: rgba(0, 0, 0, 0.2);
+  padding: var(--space-md) 0;
+  text-align: center;
+  font-size: 0.78rem;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+  .footerGrid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-xl);
+  }
+
+  .contactBarInner {
+    flex-direction: column;
+    gap: var(--space-lg);
+    text-align: center;
+  }
+
+  .socialBar {
+    flex-wrap: wrap;
+  }
+}
+
+@media (max-width: 480px) {
+  .footerGrid {
+    grid-template-columns: 1fr;
+  }
+}

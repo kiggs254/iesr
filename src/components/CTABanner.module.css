@@ -1,0 +1,93 @@
+/* ── CTA Banner ── */
+.section {
+  padding: var(--space-4xl) 0;
+  position: relative;
+  overflow: hidden;
+  background-image: 
+    linear-gradient(135deg, rgba(0, 43, 92, 0.9) 0%, rgba(0, 26, 58, 0.8) 100%),
+    url('/images/cta_campus.jpg');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}
+
+.section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at center, rgba(245, 166, 35, 0.15) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+.section::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.015) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.015) 1px, transparent 1px);
+  background-size: 40px 40px;
+  pointer-events: none;
+}
+
+.inner {
+  position: relative;
+  z-index: 1;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 var(--space-xl);
+  text-align: center;
+}
+
+.label {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-sm);
+  background: rgba(245, 166, 35, 0.12);
+  border: 1px solid rgba(245, 166, 35, 0.25);
+  color: var(--gold-light);
+  padding: 0.4rem 1rem;
+  border-radius: var(--radius-full);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  margin-bottom: var(--space-xl);
+}
+
+.title {
+  font-family: var(--font-heading);
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 800;
+  color: var(--white);
+  margin-bottom: var(--space-md);
+}
+
+.description {
+  font-size: 1.1rem;
+  color: rgba(255, 255, 255, 0.7);
+  max-width: 600px;
+  margin: 0 auto var(--space-2xl);
+  line-height: 1.7;
+}
+
+.actions {
+  display: flex;
+  justify-content: center;
+  gap: var(--space-md);
+  flex-wrap: wrap;
+}
+
+/* ── Responsive ── */
+@media (max-width: 640px) {
+  .inner {
+    padding: 0 var(--space-md);
+  }
+
+  .actions {
+    flex-direction: column;
+    align-items: center;
+  }
+}
