@@ -8,19 +8,28 @@
   background: var(--navy-dark);
 }
 
-/* ── Video Background ── */
 .heroVideo {
   position: absolute;
-  inset: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   width: 100%;
   height: 100%;
+  min-height: 100%;
   object-fit: cover;
   z-index: 0;
 }
 
 .heroVideoOverlay {
   position: absolute;
-  inset: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  min-height: 100%;
   background:
     linear-gradient(90deg, rgba(0, 20, 50, 0.82) 0%, rgba(0, 30, 65, 0.6) 50%, rgba(0, 20, 50, 0.35) 100%);
   z-index: 1;

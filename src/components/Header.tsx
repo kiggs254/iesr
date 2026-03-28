@@ -3,11 +3,26 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { Search, Accessibility } from "lucide-react";
+import { Search, Accessibility, X } from "lucide-react";
 import styles from "./Header.module.css";
 
 export default function Header() {
   const [scrolled, setScrolled] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
+
+  const toggleMenu = () => setIsOpen(!isOpen);
+
+  // Lock body scroll when menu is open
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "unset";
+    }
+    return () => {
+      document.body.style.overflow = "unset";
+    };
+  }, [isOpen]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -56,25 +71,56 @@ export default function Header() {
             />
           </Link>
 
-          <nav className={styles.nav}>
-            <Link href="/" className={`${styles.navLink} ${styles.navLinkActive}`}>Home</Link>
-            <Link href="#about" className={styles.navLink}>About IESR</Link>
-            <Link href="#departments" className={styles.navLink}>Departments</Link>
-            <Link href="#programs" className={styles.navLink}>Academic Courses</Link>
-            <Link href="#programs" className={styles.navLink}>Professional Courses</Link>
-            <Link href="#research" className={styles.navLink}>Research</Link>
-            <Link href="#news" className={styles.navLink}>News</Link>
-            <Link href="#cta" className={styles.navLink}>Contact Us</Link>
+          <nav className={`${styles.nav} ${isOpen ? styles.navOpen : ""}`}>
+            <div className={styles.drawerHeader}>
+              <span className={styles.drawerLogo}>IESR Navigation</span>
+              <button 
+                className={styles.closeDrawerBtn} 
+                onClick={toggleMenu} 
+                aria-label="Close Menu"
+              >
+                <X size={28} strokeWidth={1.5} />
+              </button>
+            </div>
+
+            <div className={styles.navLinksGroup}>
+              <Link href="/" className={`${styles.navLink} ${styles.navLinkActive}`} onClick={toggleMenu}>Home</Link>
+              <Link href="#about" className={styles.navLink} onClick={toggleMenu}>About IESR</Link>
+              <Link href="#departments" className={styles.navLink} onClick={toggleMenu}>Departments</Link>
+              <Link href="#programs" className={styles.navLink} onClick={toggleMenu}>Academic Courses</Link>
+              <Link href="#programs" className={styles.navLink} onClick={toggleMenu}>Professional Courses</Link>
+              <Link href="#research" className={styles.navLink} onClick={toggleMenu}>Research</Link>
+              <Link href="#news" className={styles.navLink} onClick={toggleMenu}>News</Link>
+              <Link href="#cta" className={styles.navLink} onClick={toggleMenu}>Contact Us</Link>
+            </div>
+            
+            {/* Mobile Utility Links (Only visible when open on mobile) */}
+            <div className={styles.mobileUtilities}>
+              <Link href="#news" className={styles.mobileUtilLink} onClick={toggleMenu}>Newsroom</Link>
+              <Link href="#" className={styles.mobileUtilLink} onClick={toggleMenu}>Student Portal</Link>
+              <Link href="#" className={styles.mobileUtilLink} onClick={toggleMenu}>Careers</Link>
+            </div>
           </nav>
 
-          <button className={styles.menuBtn} aria-label="Menu">
-            <span /><span /><span />
-          </button>
+          {/* Only show hamburger icon when menu is closed */}
+          {!isOpen && (
+            <button 
+              className={styles.menuBtn} 
+              onClick={toggleMenu}
+              aria-label="Open Menu"
+              aria-expanded={isOpen}
+            >
+              <span /><span /><span />
+            </button>
+          )}
 
           <button className={`${styles.searchBtn} ${scrolled ? styles.searchBtnHidden : ""}`} aria-label="Search">
             <Search size={18} strokeWidth={2.5} />
           </button>
         </div>
+        
+        {/* Backdrop for closing menu when clicking outside on mobile */}
+        {isOpen && <div className={styles.backdrop} onClick={toggleMenu} />}
       </div>
     </div>
   );

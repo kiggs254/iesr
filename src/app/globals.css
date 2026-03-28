@@ -280,3 +280,10 @@ ul, ol {
     padding: 0 var(--space-md);
   }
 }
+
+@media (max-width: 640px) {
+  .btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
