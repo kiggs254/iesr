@@ -243,11 +243,12 @@
 /* ── Responsive ── */
 @media (max-width: 768px) {
   .hero {
-    min-height: 85vh;
+    min-height: 65vh;
   }
 
   .heroContent {
-    padding-top: 160px;
+    padding-top: 100px;
+    padding-bottom: var(--space-xl);
     padding-left: var(--space-md);
     padding-right: var(--space-md);
   }

@@ -170,9 +170,18 @@
 .nav {
   display: flex;
   align-items: center;
-  gap: 0;
   flex: 1;
   justify-content: flex-end;
+}
+
+.drawerHeader, .mobileUtilities {
+  display: none;
+}
+
+.navLinksGroup {
+  display: flex;
+  align-items: center;
+  gap: 0;
 }
 
 .navLink {
