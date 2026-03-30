@@ -1,4 +1,5 @@
 import Link from "next/link";
+import AnimateOnScroll from "./AnimateOnScroll";
 import Image from "next/image";
 import {
   GraduationCap,
@@ -47,31 +48,37 @@ export default function ServiceCards() {
   return (
     <section className={styles.section}>
       <div className={styles.grid}>
-        {services.map((service) => (
-          <Link
+        {services.map((service, index) => (
+          <AnimateOnScroll
             key={service.title}
-            href={service.href}
-            className={`${styles.card} ${styles[service.variant]}`}
+            animation="fadeUp"
+            delay={index * 0.1}
+            style={{ height: "100%" }}
           >
-            <div className={styles.cardBg}>
-              <Image
-                src={service.image}
-                alt={service.title}
-                fill
-                style={{ objectFit: "cover" }}
-                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
-              />
-            </div>
-            <div className={styles.cardOverlay} />
-            <div className={styles.cardContent}>
-              <div className={styles.cardIcon}>{service.icon}</div>
-              <div className={styles.cardLabel}>{service.label}</div>
-              <div className={styles.cardTitle}>{service.title}</div>
-              <span className={styles.cardLink}>
-                Learn more <span>→</span>
-              </span>
-            </div>
-          </Link>
+            <Link
+              href={service.href}
+              className={`${styles.card} ${styles[service.variant]}`}
+            >
+              <div className={styles.cardBg}>
+                <Image
+                  src={service.image}
+                  alt={service.title}
+                  fill
+                  style={{ objectFit: "cover" }}
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                />
+              </div>
+              <div className={styles.cardOverlay} />
+              <div className={styles.cardContent}>
+                <div className={styles.cardIcon}>{service.icon}</div>
+                <div className={styles.cardLabel}>{service.label}</div>
+                <div className={styles.cardTitle}>{service.title}</div>
+                <span className={styles.cardLink}>
+                  Learn more <span>→</span>
+                </span>
+              </div>
+            </Link>
+          </AnimateOnScroll>
         ))}
       </div>
     </section>

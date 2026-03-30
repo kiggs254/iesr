@@ -1,4 +1,5 @@
 import Link from "next/link";
+import AnimateOnScroll from "./AnimateOnScroll";
 import {
   Zap,
   HardHat,
@@ -73,23 +74,30 @@ export default function DepartmentsSection() {
         </div>
 
         <div className={styles.grid}>
-          {departments.map((dept) => (
-            <article key={dept.title} className={styles.card}>
-              <div 
-                className={styles.cardBg}
-                style={{ backgroundImage: `url(${dept.image})` }}
-              >
-                <div className={styles.cardOverlay} />
-              </div>
-              <div className={styles.cardContent}>
-                <div className={styles.cardIcon}>{dept.icon}</div>
-                <h3 className={styles.cardTitle}>{dept.title}</h3>
-                <p className={styles.cardDescription}>{dept.description}</p>
-                <Link href="#" className={styles.cardLink}>
-                  Learn More <span>→</span>
-                </Link>
-              </div>
-            </article>
+          {departments.map((dept, index) => (
+            <AnimateOnScroll
+              key={dept.title}
+              animation="fadeUp"
+              delay={index * 0.1}
+              style={{ height: "100%" }}
+            >
+              <article className={styles.card}>
+                <div 
+                  className={styles.cardBg}
+                  style={{ backgroundImage: `url(${dept.image})` }}
+                >
+                  <div className={styles.cardOverlay} />
+                </div>
+                <div className={styles.cardContent}>
+                  <div className={styles.cardIcon}>{dept.icon}</div>
+                  <h3 className={styles.cardTitle}>{dept.title}</h3>
+                  <p className={styles.cardDescription}>{dept.description}</p>
+                  <Link href="#" className={styles.cardLink}>
+                    Learn More <span>→</span>
+                  </Link>
+                </div>
+              </article>
+            </AnimateOnScroll>
           ))}
         </div>
       </div>

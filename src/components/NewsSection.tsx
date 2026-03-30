@@ -1,4 +1,5 @@
 import Link from "next/link";
+import AnimateOnScroll from "./AnimateOnScroll";
 import Image from "next/image";
 import { Zap, Globe, FlaskConical, Trophy } from "lucide-react";
 import styles from "./NewsSection.module.css";
@@ -61,30 +62,37 @@ export default function NewsSection() {
         </div>
 
         <div className={styles.grid}>
-          {newsItems.map((item) => (
-            <article key={item.title} className={styles.card}>
-              <div className={styles.cardImage}>
-                <Image
-                  src={item.image}
-                  alt={item.title}
-                  fill
-                  style={{ objectFit: "cover" }}
-                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
-                  className={styles.cardImg}
-                />
-                <span className={styles.cardBadge}>{item.badge}</span>
-              </div>
-              <div className={styles.cardBody}>
-                <h3 className={styles.cardTitle}>{item.title}</h3>
-                <p className={styles.cardExcerpt}>{item.excerpt}</p>
-                <div className={styles.cardFooter}>
-                  <span className={styles.cardDate}>{item.date}</span>
-                  <Link href="#" className={styles.cardReadMore}>
-                    Read More <span>→</span>
-                  </Link>
+          {newsItems.map((item, index) => (
+            <AnimateOnScroll
+              key={item.title}
+              animation="fadeUp"
+              delay={index * 0.15}
+              style={{ height: "100%" }}
+            >
+              <article className={styles.card}>
+                <div className={styles.cardImage}>
+                  <Image
+                    src={item.image}
+                    alt={item.title}
+                    fill
+                    style={{ objectFit: "cover" }}
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                    className={styles.cardImg}
+                  />
+                  <span className={styles.cardBadge}>{item.badge}</span>
                 </div>
-              </div>
-            </article>
+                <div className={styles.cardBody}>
+                  <h3 className={styles.cardTitle}>{item.title}</h3>
+                  <p className={styles.cardExcerpt}>{item.excerpt}</p>
+                  <div className={styles.cardFooter}>
+                    <span className={styles.cardDate}>{item.date}</span>
+                    <Link href="#" className={styles.cardReadMore}>
+                      Read More <span>→</span>
+                    </Link>
+                  </div>
+                </div>
+              </article>
+            </AnimateOnScroll>
           ))}
         </div>
       </div>

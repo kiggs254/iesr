@@ -1,4 +1,5 @@
 import Link from "next/link";
+import AnimateOnScroll from "./AnimateOnScroll";
 import { GraduationCap, ClipboardList, CircleDot } from "lucide-react";
 import styles from "./ProgramsSection.module.css";
 
@@ -50,11 +51,17 @@ export default function ProgramsSection() {
               Accredited qualifications for the energy sector
             </p>
             <div className={styles.programList}>
-              {academicPrograms.map((program) => (
-                <div key={program} className={styles.programItem}>
-                  <CircleDot size={16} strokeWidth={1.5} className={styles.programItemIcon} />
-                  <span>{program}</span>
-                </div>
+              {academicPrograms.map((program, index) => (
+                <AnimateOnScroll
+                  key={program}
+                  animation="slideLeft"
+                  delay={index * 0.08}
+                >
+                  <div className={styles.programItem}>
+                    <CircleDot size={16} strokeWidth={1.5} className={styles.programItemIcon} />
+                    <span>{program}</span>
+                  </div>
+                </AnimateOnScroll>
               ))}
             </div>
             <div className={styles.programFooter}>
@@ -81,11 +88,17 @@ export default function ProgramsSection() {
               Industry-focused training for professionals
             </p>
             <div className={styles.programList}>
-              {professionalCourses.map((course) => (
-                <div key={course} className={styles.programItem}>
-                  <CircleDot size={16} strokeWidth={1.5} className={styles.programItemIcon} />
-                  <span>{course}</span>
-                </div>
+              {professionalCourses.map((course, index) => (
+                <AnimateOnScroll
+                  key={course}
+                  animation="slideLeft"
+                  delay={index * 0.08}
+                >
+                  <div className={styles.programItem}>
+                    <CircleDot size={16} strokeWidth={1.5} className={styles.programItemIcon} />
+                    <span>{course}</span>
+                  </div>
+                </AnimateOnScroll>
               ))}
             </div>
             <div className={styles.programFooter}>
