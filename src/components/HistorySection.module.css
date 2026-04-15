@@ -1,0 +1,313 @@
+/* ── History Section ── */
+.section {
+  padding: var(--space-4xl) 0;
+  background: var(--white);
+  overflow: hidden;
+}
+
+.sectionHeader {
+  max-width: 640px;
+  margin-bottom: var(--space-3xl);
+}
+
+.titleAccent {
+  color: var(--gold);
+}
+
+/* ── Two-Column Grid ── */
+.mainGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-3xl);
+  align-items: start;
+  margin-bottom: var(--space-4xl);
+}
+
+/* ── Story Column ── */
+.storyCol {
+  position: relative;
+}
+
+.bigYear {
+  font-family: var(--font-heading);
+  font-size: clamp(4rem, 10vw, 8rem);
+  font-weight: 900;
+  line-height: 1;
+  color: transparent;
+  -webkit-text-stroke: 2px rgba(0, 43, 92, 0.08);
+  letter-spacing: -4px;
+  margin-bottom: calc(-1 * clamp(2rem, 4vw, 4rem));
+  user-select: none;
+  pointer-events: none;
+}
+
+.storyBody {
+  position: relative;
+  z-index: 1;
+}
+
+.storyLead {
+  font-size: 1.05rem;
+  font-weight: 500;
+  color: var(--navy);
+  line-height: 1.7;
+  margin-bottom: var(--space-lg);
+  border-left: 3px solid var(--gold);
+  padding-left: var(--space-lg);
+}
+
+.storyBody p {
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  line-height: 1.8;
+  margin-bottom: var(--space-lg);
+}
+
+/* ── Stats Row ── */
+.storyStats {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xl);
+  margin-top: var(--space-2xl);
+  padding-top: var(--space-xl);
+  border-top: 1px solid var(--gray-200);
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.statNum {
+  font-family: var(--font-heading);
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--navy);
+  line-height: 1;
+}
+
+.statLabel {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.statDivider {
+  width: 1px;
+  height: 40px;
+  background: var(--gray-200);
+}
+
+/* ── Image Column ── */
+.imageCol {
+  position: relative;
+}
+
+.imageFrame {
+  position: relative;
+  height: 480px;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-xl);
+}
+
+.imageInnerOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    transparent 50%,
+    rgba(0, 27, 58, 0.5) 100%
+  );
+}
+
+/* Decorative corner accent */
+.cornerAccent {
+  position: absolute;
+  bottom: -16px;
+  right: -16px;
+  width: 120px;
+  height: 120px;
+  border: 3px solid var(--gold);
+  border-radius: var(--radius-md);
+  z-index: -1;
+  opacity: 0.4;
+}
+
+/* Floating badge */
+.floatingBadge {
+  position: absolute;
+  bottom: 28px;
+  left: -24px;
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  background: var(--white);
+  border-radius: var(--radius-md);
+  padding: var(--space-md) var(--space-lg);
+  box-shadow: var(--shadow-lg);
+  border-left: 3px solid var(--gold);
+  max-width: 280px;
+  z-index: 2;
+}
+
+.badgeIcon {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-sm);
+  background: rgba(245, 166, 35, 0.12);
+  color: var(--gold-dark);
+}
+
+.badgeTitle {
+  font-family: var(--font-heading);
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--navy);
+  margin-bottom: 0.2rem;
+}
+
+.badgeSub {
+  font-size: 0.73rem;
+  color: var(--text-muted);
+  line-height: 1.4;
+}
+
+/* ── Milestone Timeline ── */
+.milestoneRow {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-lg);
+  position: relative;
+}
+
+.milestoneRow::before {
+  content: '';
+  position: absolute;
+  top: 36px;
+  left: calc(12.5% - 4px);
+  right: calc(12.5% - 4px);
+  height: 2px;
+  background: linear-gradient(90deg, var(--gold), rgba(245, 166, 35, 0.2));
+  z-index: 0;
+}
+
+.milestoneCard {
+  position: relative;
+  background: var(--gray-50);
+  border-radius: var(--radius-md);
+  padding: var(--space-xl) var(--space-lg);
+  border: 1px solid var(--gray-200);
+  transition: all var(--transition-base);
+  text-align: center;
+}
+
+.milestoneCard:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--gold);
+  background: var(--white);
+}
+
+.milestoneYear {
+  font-family: var(--font-heading);
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--gold-dark);
+  margin-bottom: var(--space-sm);
+  display: inline-block;
+  background: rgba(245, 166, 35, 0.1);
+  border-radius: var(--radius-sm);
+  padding: 0.25rem 0.75rem;
+}
+
+.milestoneIconWrap {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--navy);
+  color: var(--white);
+  margin: var(--space-sm) auto;
+}
+
+.milestoneTitle {
+  font-family: var(--font-heading);
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--navy);
+  margin: var(--space-sm) 0 var(--space-xs);
+}
+
+.milestoneText {
+  font-size: 0.83rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+/* ── Responsive ── */
+@media (max-width: 1024px) {
+  .mainGrid {
+    gap: var(--space-2xl);
+  }
+
+  .floatingBadge {
+    left: 16px;
+    bottom: 16px;
+  }
+
+  .cornerAccent {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .section {
+    padding: var(--space-3xl) 0;
+  }
+
+  .mainGrid {
+    grid-template-columns: 1fr;
+    gap: var(--space-2xl);
+  }
+
+  .imageFrame {
+    height: 300px;
+  }
+
+  .bigYear {
+    font-size: 5rem;
+  }
+
+  .storyStats {
+    flex-wrap: wrap;
+    gap: var(--space-lg);
+  }
+
+  .statDivider {
+    display: none;
+  }
+
+  .milestoneRow {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .milestoneRow::before {
+    display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .milestoneRow {
+    grid-template-columns: 1fr;
+  }
+}

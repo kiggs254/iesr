@@ -24,6 +24,9 @@
 .DS_Store
 *.pem
 
+# Laravel CMS lives in its own repo — keep it out of the website push
+iesr laravel/
+
 # debug
 npm-debug.log*
 yarn-debug.log*

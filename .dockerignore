@@ -1,0 +1,10 @@
+.git
+.gitignore
+.env*
+node_modules
+out
+.next
+README.md
+Dockerfile
+.dockerignore
+nginx.conf

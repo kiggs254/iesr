@@ -3,7 +3,16 @@ import AnimateOnScroll from "./AnimateOnScroll";
 import { GraduationCap, ClipboardList, CircleDot } from "lucide-react";
 import styles from "./ProgramsSection.module.css";
 
-const academicPrograms = [
+interface Programme {
+  id: number;
+  name: string;
+  category: string; // "Diploma" | "Craft Certificate"
+  mode: string;
+  duration: string;
+}
+
+// Fallback data shown when the API is unreachable at build time
+const FALLBACK_ACADEMIC: string[] = [
   "Craft Certificate in Electrical & Electronic Engineering (Power Option)",
   "Diploma in Electrical and Electronic Engineering (Power Option)",
   "Craft Certificate in Automotive Engineering",
@@ -12,7 +21,7 @@ const academicPrograms = [
   "Diploma in Mechanical Engineering (Plant Option)",
 ];
 
-const professionalCourses = [
+const FALLBACK_PROFESSIONAL: string[] = [
   "Safety Competency in Power Systems (Electrical)",
   "Customer Service Excellence and Workplace Best Practices",
   "Switchgear Maintenance, Operations and Workplace Safety",
@@ -21,7 +30,37 @@ const professionalCourses = [
   "Advanced Metering and Commissioning of Four Transformer Meters",
 ];
 
-export default function ProgramsSection() {
+async function fetchProgrammes(): Promise<{ academic: string[]; professional: string[] }> {
+  const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+  if (!apiUrl) return { academic: FALLBACK_ACADEMIC, professional: FALLBACK_PROFESSIONAL };
+
+  try {
+    const res = await fetch(`${apiUrl}/api/programmes`, { cache: "force-cache" });
+    if (!res.ok) throw new Error(`API returned ${res.status}`);
+    const json = await res.json();
+    const all = json.data as Programme[];
+
+    if (!all.length) return { academic: FALLBACK_ACADEMIC, professional: FALLBACK_PROFESSIONAL };
+
+    const academic = all
+      .filter((p) => p.category === "Diploma" || p.category === "Craft Certificate")
+      .map((p) => p.name);
+
+    // ProfessionalCourse is managed separately via /api/professional-courses.
+    // This endpoint is for academic programmes only, so fall back for pro column.
+    return {
+      academic: academic.length > 0 ? academic : FALLBACK_ACADEMIC,
+      professional: FALLBACK_PROFESSIONAL,
+    };
+  } catch {
+    return { academic: FALLBACK_ACADEMIC, professional: FALLBACK_PROFESSIONAL };
+  }
+}
+
+export default async function ProgramsSection() {
+  const { academic: academicPrograms, professional: professionalCourses } =
+    await fetchProgrammes();
+
   return (
     <section id="programs" className={styles.section}>
       <div className={styles.inner}>
@@ -65,7 +104,7 @@ export default function ProgramsSection() {
               ))}
             </div>
             <div className={styles.programFooter}>
-              <Link href="#" className={styles.viewAllPrograms}>
+              <Link href="/programmes" className={styles.viewAllPrograms}>
                 View all academic programmes →
               </Link>
               <Link href="#cta" className={styles.applyBtn}>
@@ -102,7 +141,7 @@ export default function ProgramsSection() {
               ))}
             </div>
             <div className={styles.programFooter}>
-              <Link href="#" className={styles.viewAllPrograms}>
+              <Link href="/professional-courses" className={styles.viewAllPrograms}>
                 View all professional courses →
               </Link>
               <Link href="#cta" className={styles.applyBtn}>

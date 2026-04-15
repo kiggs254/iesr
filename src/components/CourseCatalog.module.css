@@ -1,0 +1,591 @@
+/* ========================================
+   COURSE CATALOG — Professional Courses
+   Udemy-style card layout with monthly
+   schedule grouping and category filters
+   ======================================== */
+
+.section {
+  padding: var(--space-4xl) 0;
+  background: #f7f8fa;
+}
+
+/* ── Filter Panel ── */
+.filterPanel {
+  background: var(--white);
+  border: 1px solid #e2e8f0;
+  border-radius: 14px;
+  padding: var(--space-xl);
+  margin-bottom: var(--space-3xl);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+  box-shadow: 0 2px 12px rgba(0, 43, 92, 0.05);
+}
+
+.filterRow {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-lg);
+}
+
+.filterLabel {
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: #a0aec0;
+  white-space: nowrap;
+  padding-top: 0.55rem;
+  min-width: 60px;
+}
+
+.filterScroll {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  flex-wrap: wrap;
+  flex: 1;
+}
+
+.filterTab {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.45rem 0.9rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #4a5568;
+  background: #f7f8fa;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 100px;
+  cursor: pointer;
+  transition: all 0.18s ease;
+  white-space: nowrap;
+  font-family: var(--font-body);
+}
+
+.filterTab:hover {
+  border-color: #a0aab4;
+  color: #1a202c;
+  background: var(--white);
+}
+
+.filterTabActive {
+  background: var(--white);
+  font-weight: 700;
+  box-shadow: 0 0 0 1.5px currentColor inset;
+}
+
+/* Month tabs — slightly more compact */
+.filterTabMonth {
+  padding: 0.35rem 0.75rem;
+  font-size: 0.76rem;
+}
+
+.filterTabMonthActive {
+  background: var(--navy);
+  color: var(--white) !important;
+  border-color: var(--navy);
+  font-weight: 700;
+  box-shadow: none;
+}
+
+.filterTabMonthActive:hover {
+  background: var(--navy-dark);
+  color: var(--white);
+  border-color: var(--navy-dark);
+}
+
+.filterDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.filterMeta {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  padding-top: var(--space-sm);
+  border-top: 1px solid #f0f2f5;
+}
+
+.resultCount {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #718096;
+  white-space: nowrap;
+}
+
+.clearFilters {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #e53e3e;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  font-family: var(--font-body);
+  transition: opacity 0.15s ease;
+}
+
+.clearFilters:hover {
+  opacity: 0.7;
+}
+
+/* ── Schedule ── */
+.schedule {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3xl);
+}
+
+/* ── Month Block ── */
+.monthBlock {
+  /* no extra wrappers needed */
+}
+
+.monthHeader {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-md);
+  margin-bottom: var(--space-xl);
+}
+
+.monthTitle {
+  font-family: var(--font-heading);
+  font-size: 1.45rem;
+  font-weight: 800;
+  color: var(--navy);
+  position: relative;
+}
+
+.monthTitle::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  width: 32px;
+  height: 3px;
+  background: var(--gold);
+  border-radius: 2px;
+}
+
+.monthCount {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #718096;
+  background: #e2e8f0;
+  padding: 0.2rem 0.65rem;
+  border-radius: 100px;
+}
+
+/* ── Grid ── */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-xl);
+}
+
+/* ── Course Card ── */
+.card {
+  background: var(--white);
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid #e2e8f0;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  cursor: default;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 40px rgba(0, 43, 92, 0.12);
+  border-color: #c5cee0;
+}
+
+/* ── Card Banner (gradient thumbnail) ── */
+.cardBanner {
+  position: relative;
+  height: 120px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: var(--space-md);
+  overflow: hidden;
+}
+
+.cardBannerDecor {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 80% 20%, rgba(255,255,255,0.15) 0%, transparent 50%),
+    radial-gradient(circle at 20% 80%, rgba(0,0,0,0.15) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+/* Subtle diagonal lines texture on banner */
+.cardBanner::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: repeating-linear-gradient(
+    -45deg,
+    transparent,
+    transparent 8px,
+    rgba(255,255,255,0.04) 8px,
+    rgba(255,255,255,0.04) 9px
+  );
+  pointer-events: none;
+}
+
+.cardCode {
+  font-family: var(--font-heading);
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: rgba(255,255,255,0.9);
+  background: rgba(0,0,0,0.25);
+  backdrop-filter: blur(8px);
+  padding: 0.25rem 0.6rem;
+  border-radius: 6px;
+  letter-spacing: 0.5px;
+  position: relative;
+  z-index: 1;
+}
+
+.popularBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-family: var(--font-body);
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: #1a202c;
+  background: #fbbf24;
+  padding: 0.2rem 0.55rem;
+  border-radius: 6px;
+  letter-spacing: 0.3px;
+  position: relative;
+  z-index: 1;
+}
+
+/* ── Card Body ── */
+.cardBody {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding: var(--space-lg);
+  gap: var(--space-sm);
+}
+
+.categoryChip {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 0.2rem 0.6rem;
+  border-radius: 6px;
+  align-self: flex-start;
+  letter-spacing: 0.2px;
+  text-transform: uppercase;
+}
+
+.categoryDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.cardTitle {
+  font-family: var(--font-heading);
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: #1a202c;
+  line-height: 1.45;
+  flex: 1;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.cardMeta {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-top: 2px;
+}
+
+.metaItem {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.75rem;
+  color: #718096;
+  font-weight: 500;
+}
+
+.metaIcon {
+  color: #a0aec0;
+  flex-shrink: 0;
+}
+
+/* ── Card Footer ── */
+.cardFooter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: var(--space-md);
+  padding-top: var(--space-md);
+  border-top: 1px solid #f0f2f5;
+}
+
+.priceBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.priceLabel {
+  font-size: 0.65rem;
+  font-weight: 600;
+  color: #a0aec0;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.price {
+  font-family: var(--font-heading);
+  font-size: 0.95rem;
+  font-weight: 800;
+  color: var(--navy);
+}
+
+.applyBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 0.45rem 0.9rem;
+  font-size: 0.78rem;
+  font-weight: 700;
+  font-family: var(--font-body);
+  color: var(--white);
+  background: var(--navy);
+  border-radius: 8px;
+  text-decoration: none;
+  transition: background 0.18s ease, transform 0.18s ease;
+  white-space: nowrap;
+}
+
+.applyBtn:hover {
+  background: var(--navy-dark);
+  transform: translateX(2px);
+}
+
+/* ── Empty State ── */
+.empty {
+  text-align: center;
+  padding: var(--space-4xl) var(--space-2xl);
+  color: #718096;
+}
+
+.emptyIcon {
+  color: #cbd5e0;
+  margin-bottom: var(--space-md);
+}
+
+/* ── On-Demand Section ── */
+.onDemand {
+  margin-top: var(--space-4xl);
+  padding: var(--space-3xl);
+  background: var(--navy-dark);
+  border-radius: 16px;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Background grid pattern */
+.onDemand::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(245, 166, 35, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(245, 166, 35, 0.04) 1px, transparent 1px);
+  background-size: 40px 40px;
+  pointer-events: none;
+}
+
+.onDemandHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-xl);
+  margin-bottom: var(--space-2xl);
+  position: relative;
+}
+
+.onDemandLabel {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs, 0.35rem);
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--gold);
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  margin-bottom: var(--space-sm);
+}
+
+.onDemandTitle {
+  font-family: var(--font-heading);
+  font-size: 1.75rem;
+  font-weight: 800;
+  color: var(--white);
+  margin-bottom: var(--space-sm);
+}
+
+.onDemandSub {
+  font-size: 0.88rem;
+  color: rgba(255, 255, 255, 0.55);
+  max-width: 520px;
+  line-height: 1.7;
+}
+
+.onDemandCta {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0.7rem 1.5rem;
+  font-size: 0.88rem;
+  font-weight: 700;
+  font-family: var(--font-body);
+  color: var(--navy);
+  background: var(--gold);
+  border-radius: 10px;
+  text-decoration: none;
+  white-space: nowrap;
+  flex-shrink: 0;
+  align-self: center;
+  transition: all 0.18s ease;
+}
+
+.onDemandCta:hover {
+  background: #e6941a;
+  transform: translateX(3px);
+}
+
+.onDemandGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-sm) var(--space-xl);
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  position: relative;
+}
+
+.onDemandItem {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-sm);
+  font-size: 0.84rem;
+  color: rgba(255, 255, 255, 0.7);
+  line-height: 1.5;
+  padding: var(--space-sm) 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  transition: color 0.18s ease;
+}
+
+.onDemandItem:hover {
+  color: var(--white);
+}
+
+.onDemandBullet {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--gold);
+  flex-shrink: 0;
+  margin-top: 6px;
+}
+
+/* ── Responsive ── */
+@media (max-width: 1100px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .onDemandGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .section {
+    padding: var(--space-3xl) 0;
+  }
+
+  .filterPanel {
+    padding: var(--space-lg);
+    gap: var(--space-md);
+  }
+
+  .filterRow {
+    flex-direction: column;
+    gap: var(--space-sm);
+  }
+
+  .filterLabel {
+    padding-top: 0;
+  }
+
+  .filterScroll {
+    width: 100%;
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    padding-bottom: 4px;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  .filterScroll::-webkit-scrollbar {
+    display: none;
+  }
+
+  .onDemand {
+    padding: var(--space-2xl) var(--space-xl);
+  }
+
+  .onDemandHeader {
+    flex-direction: column;
+  }
+
+  .onDemandGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 580px) {
+  .grid {
+    grid-template-columns: 1fr;
+    max-width: 420px;
+    margin: 0 auto;
+  }
+
+  .monthTitle {
+    font-size: 1.2rem;
+  }
+
+  .onDemandTitle {
+    font-size: 1.35rem;
+  }
+
+  .onDemandGrid {
+    grid-template-columns: 1fr;
+  }
+}

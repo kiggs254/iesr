@@ -1,0 +1,351 @@
+/* ── Intro Section ── */
+.introSection {
+  padding: var(--space-4xl) 0;
+  background: var(--white);
+}
+
+.introGrid {
+  display: grid;
+  grid-template-columns: 1fr 380px;
+  gap: var(--space-4xl);
+  align-items: center;
+}
+
+.introContent {}
+
+.introText {
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  line-height: 1.85;
+  margin-top: var(--space-lg);
+}
+
+.introCtas {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--space-lg);
+  margin-top: var(--space-2xl);
+}
+
+.introBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.72rem 1.5rem;
+  background: var(--navy);
+  color: var(--white);
+  border-radius: var(--radius-full);
+  font-family: var(--font-heading);
+  font-size: 0.88rem;
+  font-weight: 700;
+  text-decoration: none;
+  transition: all var(--transition-base);
+}
+.introBtn:hover {
+  background: var(--navy-dark);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.introLink {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--navy);
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+.introLink:hover { color: var(--gold-dark); }
+
+/* ── Stats box ── */
+.introStats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1px;
+  background: var(--gray-200);
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+}
+
+.introStat {
+  background: var(--navy-dark);
+  padding: var(--space-xl);
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  align-items: center;
+  text-align: center;
+}
+
+.introStatNum {
+  font-family: var(--font-heading);
+  font-size: 1.7rem;
+  font-weight: 800;
+  color: var(--gold);
+  line-height: 1;
+}
+
+.introStatLabel {
+  font-size: 0.77rem;
+  color: rgba(255, 255, 255, 0.5);
+  line-height: 1.4;
+  max-width: 120px;
+}
+
+/* ── Research Areas Section ── */
+.areasSection {
+  padding: var(--space-4xl) 0;
+  background: var(--gray-50);
+}
+
+.sectionHeader {
+  text-align: center;
+  max-width: 640px;
+  margin: 0 auto var(--space-3xl);
+}
+
+.sectionSub {
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  line-height: 1.75;
+  margin-top: var(--space-md);
+}
+
+/* ── Labs list ── */
+.labsList {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  border: 1px solid var(--gray-200);
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  background: var(--white);
+  box-shadow: var(--shadow-sm);
+}
+
+/* ── Lab Row ── */
+.labRow {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 0;
+  border-bottom: 1px solid var(--gray-100);
+  transition: background var(--transition-fast);
+}
+
+.labRow:last-child { border-bottom: none; }
+.labRow:hover { background: var(--gray-50); }
+
+/* Colour indicator strip */
+.labRow--navy  { border-left: 4px solid var(--navy);     }
+.labRow--gold  { border-left: 4px solid var(--gold);     }
+.labRow--amber { border-left: 4px solid var(--gold-dark);}
+.labRow--teal  { border-left: 4px solid #009688;         }
+
+/* ── Left meta panel ── */
+.labMeta {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-md);
+  padding: var(--space-xl);
+  border-right: 1px solid var(--gray-100);
+  background: rgba(248, 249, 250, 0.6);
+  position: relative;
+  overflow: hidden;
+}
+
+.labIndex {
+  position: absolute;
+  bottom: -12px;
+  right: 10px;
+  font-family: var(--font-heading);
+  font-size: 4rem;
+  font-weight: 900;
+  color: var(--gray-200);
+  line-height: 1;
+  pointer-events: none;
+  user-select: none;
+}
+
+.labIconWrap {
+  width: 42px;
+  height: 42px;
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 1;
+}
+
+.labIconWrap--navy  { background: rgba(0, 43, 92, 0.09);    color: var(--navy);      border: 1px solid rgba(0,43,92,0.12);       }
+.labIconWrap--gold  { background: rgba(245, 166, 35, 0.12); color: var(--gold-dark); border: 1px solid rgba(245,166,35,0.2);     }
+.labIconWrap--amber { background: rgba(212, 144, 26, 0.12); color: var(--gold-dark); border: 1px solid rgba(212,144,26,0.2);     }
+.labIconWrap--teal  { background: rgba(0, 150, 136, 0.09);  color: #00796b;          border: 1px solid rgba(0,150,136,0.15);     }
+
+.labInfo { position: relative; z-index: 1; }
+
+.labAbbr {
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--text-muted);
+  line-height: 1;
+  margin-bottom: 0.3rem;
+}
+
+.labTitle {
+  font-family: var(--font-heading);
+  font-size: 0.95rem;
+  font-weight: 800;
+  color: var(--navy);
+  line-height: 1.3;
+}
+
+/* ── Right content panel ── */
+.labContent {
+  padding: var(--space-xl);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+  justify-content: center;
+}
+
+/* ── Tag pills ── */
+.labTags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.labTag {
+  display: inline-block;
+  padding: 0.3rem 0.85rem;
+  border-radius: var(--radius-full);
+  font-size: 0.8rem;
+  font-weight: 500;
+  line-height: 1.4;
+  transition: all var(--transition-fast);
+}
+
+.labTag--navy  { background: rgba(0, 43, 92, 0.07);    color: var(--navy);      border: 1px solid rgba(0,43,92,0.12);     }
+.labTag--gold  { background: rgba(245, 166, 35, 0.1);  color: #8a5a00;          border: 1px solid rgba(245,166,35,0.2);   }
+.labTag--amber { background: rgba(212, 144, 26, 0.09); color: #8a5a00;          border: 1px solid rgba(212,144,26,0.18);  }
+.labTag--teal  { background: rgba(0, 150, 136, 0.07);  color: #00695c;          border: 1px solid rgba(0,150,136,0.15);   }
+
+.labTag:hover { transform: translateY(-1px); box-shadow: var(--shadow-sm); }
+
+/* ── Groups (DAL / MSR) ── */
+.labGroupsWrap {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.labGroupBlock {}
+
+.labGroupLabel {
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.7px;
+  color: var(--text-muted);
+  margin-bottom: 0.55rem;
+}
+
+/* ── CTA Section ── */
+.ctaSection {
+  padding: var(--space-4xl) 0;
+  background: var(--navy-dark);
+}
+
+.ctaInner {
+  text-align: center;
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+.ctaTitle {
+  font-family: var(--font-heading);
+  font-size: clamp(1.75rem, 3vw, 2.25rem);
+  font-weight: 800;
+  color: var(--white);
+  margin-bottom: var(--space-md);
+}
+
+.ctaSub {
+  font-size: 0.95rem;
+  color: rgba(255, 255, 255, 0.6);
+  line-height: 1.75;
+  margin-bottom: var(--space-2xl);
+}
+
+.ctaBtns {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: var(--space-lg);
+}
+
+.ctaPrimary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.85rem 2rem;
+  background: var(--gold);
+  color: var(--navy-dark);
+  border-radius: var(--radius-full);
+  font-family: var(--font-heading);
+  font-size: 0.95rem;
+  font-weight: 700;
+  text-decoration: none;
+  transition: all var(--transition-base);
+}
+.ctaPrimary:hover {
+  background: var(--gold-dark);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+.ctaOutline {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.85rem 2rem;
+  border: 2px solid rgba(255, 255, 255, 0.25);
+  color: rgba(255, 255, 255, 0.75);
+  border-radius: var(--radius-full);
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all var(--transition-base);
+}
+.ctaOutline:hover {
+  border-color: var(--white);
+  color: var(--white);
+}
+
+/* ── Responsive ── */
+@media (max-width: 1100px) {
+  .introGrid { grid-template-columns: 1fr; }
+  .introStats { max-width: 480px; }
+  .labRow { grid-template-columns: 240px 1fr; }
+}
+
+@media (max-width: 768px) {
+  .labRow { grid-template-columns: 1fr; }
+  .labMeta { border-right: none; border-bottom: 1px solid var(--gray-100); }
+  .labIndex { bottom: -8px; right: 8px; font-size: 3rem; }
+}
+
+@media (max-width: 640px) {
+  .introStats { grid-template-columns: 1fr 1fr; max-width: 100%; }
+  .introSection { padding: var(--space-3xl) 0; }
+  .areasSection { padding: var(--space-3xl) 0; }
+  .ctaSection { padding: var(--space-3xl) 0; }
+  .ctaBtns { flex-direction: column; align-items: center; }
+  .labContent { padding: var(--space-lg); }
+  .labMeta { padding: var(--space-lg); }
+}

@@ -1,0 +1,329 @@
+/* ── Section ── */
+.section {
+  padding: var(--space-4xl) 0;
+  background: var(--white);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Subtle decorative background */
+.section::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 480px;
+  height: 480px;
+  background: radial-gradient(circle, rgba(245, 166, 35, 0.06) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+/* ── Section Header ── */
+.sectionHeader {
+  text-align: center;
+  max-width: 580px;
+  margin: 0 auto var(--space-3xl);
+}
+
+.sectionLabel {
+  font-family: var(--font-heading);
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--gold-dark);
+  margin-bottom: var(--space-sm);
+  display: block;
+}
+
+.sectionTitle {
+  font-family: var(--font-heading);
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
+  font-weight: 800;
+  color: var(--navy);
+  margin-bottom: var(--space-md);
+  line-height: 1.15;
+}
+
+.sectionSub {
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  line-height: 1.75;
+}
+
+/* ── Vision + Mission row ── */
+.vmRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-xl);
+  margin-bottom: var(--space-xl);
+}
+
+/* ── Card base ── */
+.card {
+  border-radius: var(--radius-xl);
+  padding: var(--space-2xl);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+  position: relative;
+  overflow: hidden;
+  transition: transform var(--transition-slow), box-shadow var(--transition-slow);
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-xl);
+}
+
+/* Vision — dark navy */
+.cardVision {
+  background: var(--navy-dark);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.cardVision::after {
+  content: "";
+  position: absolute;
+  bottom: -60px;
+  right: -60px;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(245, 166, 35, 0.12) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+/* Mission — gold accent */
+.cardMission {
+  background: var(--gray-50);
+  border: 1px solid var(--gray-200);
+}
+
+.cardMission::after {
+  content: "";
+  position: absolute;
+  bottom: -40px;
+  right: -40px;
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(0, 43, 92, 0.05) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+/* ── Icon wrap ── */
+.cardIconWrap {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 54px;
+  height: 54px;
+  border-radius: var(--radius-lg);
+  flex-shrink: 0;
+}
+
+.cardVision .cardIconWrap {
+  background: rgba(245, 166, 35, 0.15);
+  color: var(--gold);
+  border: 1px solid rgba(245, 166, 35, 0.25);
+}
+
+.cardMission .cardIconWrap {
+  background: rgba(0, 43, 92, 0.08);
+  color: var(--navy);
+  border: 1px solid rgba(0, 43, 92, 0.12);
+}
+
+/* ── Label ── */
+.cardLabel {
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.cardLabel::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+}
+
+.cardVision .cardLabel {
+  color: var(--gold);
+}
+
+.cardVision .cardLabel::after {
+  background: rgba(245, 166, 35, 0.25);
+}
+
+.cardMission .cardLabel {
+  color: var(--navy-light);
+}
+
+.cardMission .cardLabel::after {
+  background: var(--gray-200);
+}
+
+/* ── Quote ── */
+.cardQuote {
+  font-family: var(--font-heading);
+  font-size: clamp(1.05rem, 2vw, 1.25rem);
+  font-weight: 600;
+  line-height: 1.65;
+  font-style: italic;
+  quotes: none;
+  flex: 1;
+}
+
+.cardVision .cardQuote {
+  color: rgba(255, 255, 255, 0.92);
+}
+
+.cardMission .cardQuote {
+  color: var(--navy);
+}
+
+/* Opening quote mark decoration */
+.cardQuote::before {
+  content: "\201C";
+  display: block;
+  font-size: 4rem;
+  line-height: 0.6;
+  margin-bottom: var(--space-md);
+  font-style: normal;
+  font-weight: 800;
+  opacity: 0.18;
+}
+
+.cardVision .cardQuote::before { color: var(--gold); }
+.cardMission .cardQuote::before { color: var(--navy); }
+
+/* ── Objectives row ── */
+.objCard {
+  background: var(--navy);
+  border-radius: var(--radius-xl);
+  padding: var(--space-2xl);
+  position: relative;
+  overflow: hidden;
+}
+
+.objCard::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(rgba(245, 166, 35, 0.05) 1px, transparent 1px);
+  background-size: 28px 28px;
+  pointer-events: none;
+}
+
+.objCard::after {
+  content: "";
+  position: absolute;
+  top: -80px;
+  left: -80px;
+  width: 280px;
+  height: 280px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(245, 166, 35, 0.08) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.objHeader {
+  display: flex;
+  align-items: center;
+  gap: var(--space-lg);
+  margin-bottom: var(--space-xl);
+  position: relative;
+  z-index: 1;
+  padding-bottom: var(--space-lg);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.objIconWrap {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 54px;
+  height: 54px;
+  border-radius: var(--radius-lg);
+  background: rgba(245, 166, 35, 0.15);
+  color: var(--gold);
+  border: 1px solid rgba(245, 166, 35, 0.25);
+  flex-shrink: 0;
+}
+
+.objTitle {
+  font-family: var(--font-heading);
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: var(--white);
+}
+
+.objSubtitle {
+  font-size: 0.83rem;
+  color: rgba(255, 255, 255, 0.45);
+  margin-top: 0.15rem;
+}
+
+.objGrid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: var(--space-md);
+  position: relative;
+  z-index: 1;
+}
+
+.objItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: var(--space-sm);
+  padding: var(--space-lg) var(--space-md);
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: var(--radius-lg);
+  transition: background var(--transition-base), border-color var(--transition-base), transform var(--transition-base);
+}
+
+.objItem:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(245, 166, 35, 0.25);
+  transform: translateY(-3px);
+}
+
+.objNum {
+  font-family: var(--font-heading);
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: var(--gold);
+  line-height: 1;
+}
+
+.objText {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.75);
+  line-height: 1.45;
+}
+
+/* ── Responsive ── */
+@media (max-width: 960px) {
+  .objGrid { grid-template-columns: repeat(3, 1fr); }
+}
+
+@media (max-width: 768px) {
+  .vmRow { grid-template-columns: 1fr; }
+  .objGrid { grid-template-columns: repeat(2, 1fr); }
+  .section { padding: var(--space-3xl) 0; }
+}
+
+@media (max-width: 480px) {
+  .objGrid { grid-template-columns: 1fr 1fr; }
+  .card { padding: var(--space-xl); }
+  .objCard { padding: var(--space-xl) var(--space-lg); }
+}

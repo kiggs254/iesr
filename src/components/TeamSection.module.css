@@ -1,0 +1,471 @@
+/* ══════════════════════════════════════════════
+   TeamSection — Management Hierarchy Org Chart
+   ══════════════════════════════════════════════ */
+
+.section {
+  padding: var(--space-4xl) 0 var(--space-4xl);
+  background: var(--gray-50);
+  position: relative;
+}
+
+.section::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--navy), var(--gold), var(--navy));
+}
+
+/* ── Section header ── */
+.sectionHeader {
+  max-width: 580px;
+  margin-bottom: var(--space-3xl);
+}
+
+.subtitle {
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  line-height: 1.7;
+  margin-top: var(--space-sm);
+}
+
+/* ═════════════════════════════════
+   Org chart wrapper
+   ═════════════════════════════════ */
+.orgChart {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* ═════════════════════════════════
+   Director card
+   ═════════════════════════════════ */
+.directorWrap {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.directorCard {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2xl);
+  padding: var(--space-2xl) var(--space-3xl);
+  background: var(--navy-dark);
+  border-radius: var(--radius-xl);
+  border: 1px solid rgba(245, 166, 35, 0.18);
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.22), 0 0 0 1px rgba(245, 166, 35, 0.08);
+  max-width: 640px;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Subtle gold glow behind card */
+.directorCard::before {
+  content: '';
+  position: absolute;
+  top: -40px; right: -40px;
+  width: 200px; height: 200px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(245, 166, 35, 0.08) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+/* Photo ring */
+.dirPhotoRing {
+  flex-shrink: 0;
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  border: 3px solid var(--gold);
+  padding: 3px;
+  background: linear-gradient(135deg, var(--gold-dark), var(--gold));
+  box-shadow: 0 0 0 6px rgba(245, 166, 35, 0.12);
+  overflow: hidden;
+  position: relative;
+}
+
+.dirPhoto {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  display: block;
+}
+
+.dirInitials {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-heading);
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: var(--navy-dark);
+  letter-spacing: 1px;
+}
+
+/* Info block */
+.dirInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.dirBadge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.25rem 0.85rem;
+  background: rgba(245, 166, 35, 0.18);
+  border: 1px solid rgba(245, 166, 35, 0.35);
+  border-radius: var(--radius-full);
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--gold);
+  width: fit-content;
+}
+
+.dirName {
+  font-family: var(--font-heading);
+  font-size: 1.45rem;
+  font-weight: 800;
+  color: var(--white);
+  line-height: 1.2;
+}
+
+.dirTitle {
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.6);
+  font-weight: 500;
+}
+
+.dirOrg {
+  font-size: 0.78rem;
+  color: rgba(255, 255, 255, 0.3);
+  margin-top: 0.15rem;
+}
+
+/* ═════════════════════════════════
+   Tree join: Director → L2
+   ═════════════════════════════════ */
+.treeJoin {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  pointer-events: none;
+}
+
+/* Vertical stem from director */
+.joinV {
+  display: block;
+  width: 2px;
+  height: 28px;
+  background: var(--gray-300);
+}
+
+/* Horizontal bar spanning the 3-column L2 row */
+/* Spans from ~center-of-col1 to ~center-of-col3 */
+/* With 3 equal cols + 2rem gap ≈ first/last col centers at ~16% from each edge */
+.joinH {
+  display: block;
+  height: 2px;
+  width: calc(66.67% - var(--space-xl));
+  background: var(--gray-300);
+}
+
+/* ═════════════════════════════════
+   L2 Row
+   ═════════════════════════════════ */
+.l2Row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-xl);
+  width: 100%;
+  align-items: start;
+}
+
+/* ── L2 Branch (column with card + optional sub-reports) ── */
+.l2Branch {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+/* Vertical drop from horizontal bar to L2 card */
+.l2Branch::before {
+  content: '';
+  position: absolute;
+  top: -28px;       /* reach up to where .joinH is */
+  left: 50%;
+  transform: translateX(-50%);
+  width: 2px;
+  height: 28px;
+  background: var(--gray-300);
+}
+
+/* ── L2 Card ── */
+.l2Card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: var(--space-xl) var(--space-lg);
+  background: var(--white);
+  border-radius: var(--radius-xl);
+  border: 1px solid var(--gray-200);
+  box-shadow: var(--shadow-sm);
+  width: 100%;
+  transition: box-shadow var(--transition-base), transform var(--transition-base), border-color var(--transition-base);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Gold top accent line */
+.l2Card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--navy), var(--gold));
+}
+
+.l2Card:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-4px);
+  border-color: rgba(0, 43, 92, 0.15);
+}
+
+.l2PhotoWrap {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 2px solid var(--gray-200);
+  background: var(--gray-100);
+  margin-bottom: var(--space-md);
+  flex-shrink: 0;
+}
+
+.l2Photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.l2Initials {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-heading);
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--navy);
+  background: rgba(0, 43, 92, 0.07);
+}
+
+.l2Name {
+  font-family: var(--font-heading);
+  font-size: 0.95rem;
+  font-weight: 800;
+  color: var(--navy);
+  line-height: 1.3;
+  margin-bottom: 0.35rem;
+}
+
+.l2Title {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  font-weight: 500;
+  line-height: 1.5;
+}
+
+/* ═════════════════════════════════
+   Sub-connector (L2 → sub-reports)
+   ═════════════════════════════════ */
+.subConnV {
+  display: block;
+  width: 2px;
+  height: 24px;
+  background: var(--gray-200);
+  flex-shrink: 0;
+}
+
+/* ═════════════════════════════════
+   Sub-report grid
+   ═════════════════════════════════ */
+.subGrid {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: 100%;
+  /* Top border acts as a "cap" connecting the sub-connector */
+  border-top: 2px solid var(--gray-200);
+  padding-top: 0.5rem;
+}
+
+/* ── Sub card ── */
+.subCard {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  padding: 0.6rem 0.8rem;
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--gray-100);
+  transition: background var(--transition-fast), border-color var(--transition-fast);
+}
+
+.subCard:hover {
+  background: rgba(0, 43, 92, 0.03);
+  border-color: rgba(0, 43, 92, 0.1);
+}
+
+.subCardVacant {
+  opacity: 0.6;
+  background: rgba(248, 249, 250, 0.5);
+}
+
+.subCardVacant:hover {
+  background: rgba(248, 249, 250, 0.5);
+  border-color: var(--gray-100);
+}
+
+.subPhotoWrap {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  overflow: hidden;
+  flex-shrink: 0;
+  border: 1px solid var(--gray-200);
+  background: var(--gray-100);
+}
+
+.subPhoto {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.subInitials {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-heading);
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: var(--navy);
+  background: rgba(0, 43, 92, 0.07);
+}
+
+.subInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  min-width: 0;
+}
+
+.subName {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-dark);
+  line-height: 1.35;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.subCardVacant .subName {
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+.vacantBadge {
+  display: inline-block;
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--text-muted);
+  background: var(--gray-100);
+  border-radius: var(--radius-sm);
+  padding: 0.1rem 0.4rem;
+  width: fit-content;
+}
+
+/* ═════════════════════════════════
+   Responsive
+   ═════════════════════════════════ */
+
+@media (max-width: 960px) {
+  .l2Row {
+    grid-template-columns: 1fr;
+    max-width: 420px;
+    gap: var(--space-lg);
+  }
+
+  .l2Branch::before { display: none; }
+
+  .joinH { display: none; }
+
+  .joinV {
+    height: 20px;
+  }
+
+  .directorCard {
+    gap: var(--space-xl);
+    padding: var(--space-xl) var(--space-2xl);
+  }
+
+  .subGrid {
+    border-top: none;
+    padding-top: 0;
+    padding-left: var(--space-md);
+    border-left: 2px solid var(--gray-200);
+    margin-left: 20px; /* align with sub-connector */
+  }
+}
+
+@media (max-width: 640px) {
+  .section { padding: var(--space-3xl) 0; }
+
+  .directorCard {
+    flex-direction: column;
+    text-align: center;
+    padding: var(--space-xl) var(--space-lg);
+    gap: var(--space-lg);
+  }
+
+  .dirInfo { align-items: center; }
+
+  .dirBadge { align-self: center; }
+
+  .dirPhotoRing {
+    width: 90px;
+    height: 90px;
+  }
+
+  .dirName { font-size: 1.2rem; }
+
+  .subName {
+    white-space: normal;
+    overflow: visible;
+    text-overflow: unset;
+  }
+}
+
+@media (max-width: 420px) {
+  .l2Row { max-width: 100%; }
+}
