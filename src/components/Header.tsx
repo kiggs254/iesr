@@ -58,7 +58,7 @@ export default function Header() {
               <Accessibility size={14} />
             </button>
             <a
-              href={process.env.NEXT_PUBLIC_PORTAL_URL ?? "https://learn.iesr.co.ke"}
+              href={process.env.NEXT_PUBLIC_PORTAL_URL ?? "https://iesrlms.netlify.app"}
               className={styles.enquiryBtn}
               target="_blank"
               rel="noopener noreferrer"
@@ -136,7 +136,7 @@ export default function Header() {
 
             <div className={styles.mobileUtilities}>
               <Link href="/news" className={styles.mobileUtilLink} onClick={closeAll}>Newsroom</Link>
-              <a href={process.env.NEXT_PUBLIC_PORTAL_URL ?? "https://learn.iesr.co.ke"} className={`${styles.mobileUtilLink} ${styles.mobileUtilPortal}`} target="_blank" rel="noopener noreferrer">Student Portal ↗</a>
+              <a href={process.env.NEXT_PUBLIC_PORTAL_URL ?? "https://iesrlms.netlify.app"} className={`${styles.mobileUtilLink} ${styles.mobileUtilPortal}`} target="_blank" rel="noopener noreferrer">Student Portal ↗</a>
               <Link href="/contact" className={styles.mobileUtilLink} onClick={closeAll}>Contact Us</Link>
               <Link href="#" className={styles.mobileUtilLink} onClick={closeAll}>Careers</Link>
             </div>

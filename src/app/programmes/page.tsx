@@ -186,7 +186,7 @@ export default async function ProgrammesPage() {
                     View Training Calendar <ArrowRight size={15} />
                   </Link>
                   <a
-                    href={process.env.NEXT_PUBLIC_PORTAL_URL ?? "https://learn.iesr.co.ke"}
+                    href={process.env.NEXT_PUBLIC_PORTAL_URL ?? "https://iesrlms.netlify.app"}
                     className={styles.proLink}
                     target="_blank"
                     rel="noopener noreferrer"

@@ -199,7 +199,7 @@ export default function ContactPage() {
                       Kenya Power (KPLC)
                     </a>
                     <a
-                      href={process.env.NEXT_PUBLIC_PORTAL_URL ?? "https://learn.iesr.co.ke"}
+                      href={process.env.NEXT_PUBLIC_PORTAL_URL ?? "https://iesrlms.netlify.app"}
                       target="_blank"
                       rel="noopener noreferrer"
                       className={styles.externalLink}
