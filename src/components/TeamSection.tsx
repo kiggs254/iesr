@@ -11,10 +11,8 @@ interface TeamMember {
 }
 
 const CMS_BASE = "https://stagingiesr.jiles.co.ke/";
-const PLACEHOLDER = `${CMS_BASE}images/placeholders/deputy-silhouette.svg`;
 
 const FALLBACK_TEAM: TeamMember[] = [
-  // Director
   {
     id: 1,
     name: "Dr. Jeremiah Kiplagat",
@@ -23,7 +21,6 @@ const FALLBACK_TEAM: TeamMember[] = [
     parent_id: null,
     sort_order: 1,
   },
-  // L2 — direct reports to Director
   {
     id: 2,
     name: "Dr. Patrick Karimi",
@@ -48,7 +45,6 @@ const FALLBACK_TEAM: TeamMember[] = [
     parent_id: 1,
     sort_order: 3,
   },
-  // Under Dr. Patrick Karimi
   {
     id: 5,
     name: "Henry Pwani",
@@ -65,72 +61,11 @@ const FALLBACK_TEAM: TeamMember[] = [
     parent_id: 2,
     sort_order: 2,
   },
-  {
-    id: 7,
-    name: "Head, Capacity Building",
-    title: "Vacant Position",
-    photo_url: PLACEHOLDER,
-    parent_id: 2,
-    sort_order: 3,
-  },
-  {
-    id: 8,
-    name: "Head, Engineering & Prof. Dev.",
-    title: "Vacant Position",
-    photo_url: PLACEHOLDER,
-    parent_id: 2,
-    sort_order: 4,
-  },
-  // Under Mercy Njeri
-  {
-    id: 9,
-    name: "Head, Human Resources",
-    title: "Vacant Position",
-    photo_url: PLACEHOLDER,
-    parent_id: 4,
-    sort_order: 1,
-  },
-  {
-    id: 10,
-    name: "Head, Finance",
-    title: "Vacant Position",
-    photo_url: PLACEHOLDER,
-    parent_id: 4,
-    sort_order: 2,
-  },
-  {
-    id: 11,
-    name: "Head, ICT",
-    title: "Vacant Position",
-    photo_url: PLACEHOLDER,
-    parent_id: 4,
-    sort_order: 3,
-  },
-  {
-    id: 12,
-    name: "Head, Procurement",
-    title: "Vacant Position",
-    photo_url: PLACEHOLDER,
-    parent_id: 4,
-    sort_order: 4,
-  },
-  {
-    id: 13,
-    name: "Head, Marketing",
-    title: "Vacant Position",
-    photo_url: PLACEHOLDER,
-    parent_id: 4,
-    sort_order: 5,
-  },
-  {
-    id: 14,
-    name: "Head, Legal & Risk Mgmt.",
-    title: "Vacant Position",
-    photo_url: PLACEHOLDER,
-    parent_id: 4,
-    sort_order: 6,
-  },
 ];
+
+function hasRealPhoto(m: TeamMember): boolean {
+  return !!m.photo_url && !m.photo_url.includes("placeholder") && !m.photo_url.includes("silhouette");
+}
 
 async function fetchTeam(): Promise<TeamMember[]> {
   const apiUrl = process.env.NEXT_PUBLIC_API_URL;
@@ -141,35 +76,21 @@ async function fetchTeam(): Promise<TeamMember[]> {
     if (!res.ok) throw new Error(`API returned ${res.status}`);
     const json = await res.json();
     const nodes = json.data as TeamMember[];
-    return nodes?.length > 0 ? nodes : FALLBACK_TEAM;
+    if (!nodes?.length) return FALLBACK_TEAM;
+    // Only keep members who have a real photo
+    return nodes.filter(hasRealPhoto);
   } catch {
     return FALLBACK_TEAM;
   }
 }
 
-function getInitials(name: string): string {
-  return name
-    .split(" ")
-    .filter(Boolean)
-    .slice(0, 2)
-    .map((w) => w[0].toUpperCase())
-    .join("");
-}
-
 export default async function TeamSection() {
-  const allMembers = await fetchTeam();
+  const members = await fetchTeam();
 
-  const director = allMembers.find((m) => m.parent_id === null);
-  const l2 = director
-    ? allMembers
-        .filter((m) => m.parent_id === director.id)
-        .sort((a, b) => a.sort_order - b.sort_order)
-    : [];
-
-  const childrenOf = (id: number) =>
-    allMembers
-      .filter((m) => m.parent_id === id)
-      .sort((a, b) => a.sort_order - b.sort_order);
+  const director = members.find((m) => m.parent_id === null);
+  const staff = members
+    .filter((m) => m.parent_id !== null)
+    .sort((a, b) => a.sort_order - b.sort_order);
 
   if (!director) return null;
 
@@ -188,134 +109,56 @@ export default async function TeamSection() {
           </div>
         </AnimateOnScroll>
 
-        {/* ── Org chart ── */}
-        <div className={styles.orgChart}>
-
-          {/* ── Director ── */}
-          <AnimateOnScroll animation="fadeUp" threshold={0.1}>
-            <div className={styles.directorWrap}>
-              <div className={styles.directorCard}>
-                {/* Photo */}
-                <div className={styles.dirPhotoRing}>
-                  {director.photo_url ? (
-                    // eslint-disable-next-line @next/next/no-img-element
-                    <img
-                      src={director.photo_url}
-                      alt={director.name}
-                      className={styles.dirPhoto}
-                    />
-                  ) : (
-                    <span className={styles.dirInitials}>
-                      {getInitials(director.name)}
-                    </span>
-                  )}
-                </div>
-
-                {/* Info */}
-                <div className={styles.dirInfo}>
-                  <span className={styles.dirBadge}>Director General</span>
-                  <h3 className={styles.dirName}>{director.name}</h3>
-                  <p className={styles.dirTitle}>{director.title}</p>
-                  <p className={styles.dirOrg}>
-                    Institute of Energy Studies &amp; Research · Kenya Power
-                  </p>
-                </div>
+        {/* ── Director ── */}
+        <AnimateOnScroll animation="fadeUp" threshold={0.1}>
+          <div className={styles.directorWrap}>
+            <div className={styles.directorCard}>
+              <div className={styles.dirPhotoRing}>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={director.photo_url!}
+                  alt={director.name}
+                  className={styles.dirPhoto}
+                />
+              </div>
+              <div className={styles.dirInfo}>
+                <span className={styles.dirBadge}>Director General</span>
+                <h3 className={styles.dirName}>{director.name}</h3>
+                <p className={styles.dirTitle}>{director.title}</p>
+                <p className={styles.dirOrg}>
+                  Institute of Energy Studies &amp; Research · Kenya Power
+                </p>
               </div>
             </div>
-          </AnimateOnScroll>
+          </div>
+        </AnimateOnScroll>
 
-          {/* ── Tree connector director → L2 ── */}
-          {l2.length > 0 && (
-            <div className={styles.treeJoin} aria-hidden="true">
-              <span className={styles.joinV} />
-              <span className={styles.joinH} />
-            </div>
-          )}
-
-          {/* ── L2 Row ── */}
-          {l2.length > 0 && (
-            <div className={styles.l2Row}>
-              {l2.map((member, i) => {
-                const subs = childrenOf(member.id);
-                return (
-                  <div key={member.id} className={styles.l2Branch}>
-
-                    {/* L2 card */}
-                    <AnimateOnScroll animation="fadeUp" delay={i * 0.13} threshold={0.05}>
-                      <div className={styles.l2Card}>
-                        <div className={styles.l2PhotoWrap}>
-                          {member.photo_url ? (
-                            // eslint-disable-next-line @next/next/no-img-element
-                            <img
-                              src={member.photo_url}
-                              alt={member.name}
-                              className={styles.l2Photo}
-                            />
-                          ) : (
-                            <span className={styles.l2Initials}>
-                              {getInitials(member.name)}
-                            </span>
-                          )}
-                        </div>
-                        <h3 className={styles.l2Name}>{member.name}</h3>
-                        <p className={styles.l2Title}>{member.title}</p>
-                      </div>
-                    </AnimateOnScroll>
-
-                    {/* Sub-reports */}
-                    {subs.length > 0 && (
-                      <>
-                        <div className={styles.subConnV} aria-hidden="true" />
-                        <div className={styles.subGrid}>
-                          {subs.map((sub, j) => {
-                            const isVacant = sub.title === "Vacant Position";
-                            return (
-                              <AnimateOnScroll
-                                key={sub.id}
-                                animation="fadeUp"
-                                delay={i * 0.1 + j * 0.06}
-                                threshold={0.03}
-                              >
-                                <div
-                                  className={`${styles.subCard} ${
-                                    isVacant ? styles.subCardVacant : ""
-                                  }`}
-                                >
-                                  <div className={styles.subPhotoWrap}>
-                                    {sub.photo_url ? (
-                                      // eslint-disable-next-line @next/next/no-img-element
-                                      <img
-                                        src={sub.photo_url}
-                                        alt={isVacant ? "Vacant" : sub.name}
-                                        className={styles.subPhoto}
-                                      />
-                                    ) : (
-                                      <span className={styles.subInitials}>
-                                        {getInitials(sub.name)}
-                                      </span>
-                                    )}
-                                  </div>
-                                  <div className={styles.subInfo}>
-                                    <p className={styles.subName}>{sub.name}</p>
-                                    {isVacant && (
-                                      <span className={styles.vacantBadge}>
-                                        Vacant
-                                      </span>
-                                    )}
-                                  </div>
-                                </div>
-                              </AnimateOnScroll>
-                            );
-                          })}
-                        </div>
-                      </>
-                    )}
+        {/* ── Team grid ── */}
+        {staff.length > 0 && (
+          <div className={styles.teamGrid}>
+            {staff.map((member, i) => (
+              <AnimateOnScroll
+                key={member.id}
+                animation="fadeUp"
+                delay={i * 0.1}
+                threshold={0.05}
+              >
+                <div className={styles.memberCard}>
+                  <div className={styles.memberPhotoWrap}>
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src={member.photo_url!}
+                      alt={member.name}
+                      className={styles.memberPhoto}
+                    />
                   </div>
-                );
-              })}
-            </div>
-          )}
-        </div>
+                  <h3 className={styles.memberName}>{member.name}</h3>
+                  <p className={styles.memberTitle}>{member.title}</p>
+                </div>
+              </AnimateOnScroll>
+            ))}
+          </div>
+        )}
       </div>
     </section>
   );
